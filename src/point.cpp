@@ -25,3 +25,25 @@ Point operator* (float factor, const Point& p){
 void Point::draw(int color){
 	paintpix(x, y, color);
 }
+
+void Point::applyTransform(matrix_t& m){
+	matrix_t res;
+	float pdata[3][1]; pdata[0][0] = x; pdata[1][0] = y; pdata[2][0] = 1;
+	
+	res = mmultiply(m, (float*) pdata, 1);
+	x = res.data[0][0]; y = res.data[1][0];
+}
+
+void Point::applyTransform(Transform trans){
+	applyTransform(trans.mat);
+}
+
+/*
+
+static point_t transform(matrix_t m, point_t p){
+	
+}
+
+
+
+*/

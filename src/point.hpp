@@ -1,7 +1,8 @@
-#ifndef POINT_H
-#define POINT_H
+#ifndef POINT_HPP
+#define POINT_HPP
 
 #include "libgraph.hpp"
+#include "trans.hpp"
 
 class Point{
 	public:
@@ -14,6 +15,8 @@ class Point{
 		friend Point operator* (float factor, const Point& p);
 		
 		void draw(int color);
+		void applyTransform(matrix_t& m);
+		void applyTransform(Transform trans);
 };
 
 #endif

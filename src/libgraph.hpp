@@ -1,5 +1,5 @@
-#ifndef LIBGRAPH_H
-#define LIBGRAPH_H
+#ifndef LIBGRAPH_HPP
+#define LIBGRAPH_HPP
 
 #include <stdio.h>
 #include <stdlib.h>
