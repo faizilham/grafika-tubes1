@@ -1,6 +1,8 @@
 # this makefile is used for compilation using openbgi (http://openbgi.sourceforge.net/)
 
-LIB = -Llib -lopenbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32
+LIB = -Llib -lopenbgi -lgdi32 
+# -lcomdlg32 -luuid -loleaut32 -lole32 # needed or not?
+
 INCLUDE = -Ilib
 
 all : bin/libgraph.o bin/main.o
@@ -12,6 +14,9 @@ bin/main.o: src/main.cpp
 bin/libgraph.o:
 	g++ -c src/libgraph.cpp -o bin/libgraph.o $(INCLUDE)
 	
+run:
+	bin/main
+
 clean:
 	rm -rf bin/main
 	
