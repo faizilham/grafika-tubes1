@@ -1,0 +1,1 @@
+# this makefile is used for compilation using openbgi
