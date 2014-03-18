@@ -1,5 +1,7 @@
 #include "libgraph.hpp"
 
+static int midx, midy;
+
 void init_graph(){
 	int gdriver = DETECT; int gmode;
 	initgraph(&gdriver,&gmode,"C:\\TC\\BGI");

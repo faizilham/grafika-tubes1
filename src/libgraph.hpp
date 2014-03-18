@@ -7,10 +7,14 @@
 #include <graphics.h>
 #include <conio.h>
 
-static int midx, midy;
+
+/** Graphic Primitive **/
 
 void init_graph();
 void paintpix(int x, int y, int color);
+
+/** Graphics Algorithms **/
+
 void draw_line(int x1, int y1, int x2, int y2, int color);
 
 #endif

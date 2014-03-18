@@ -5,14 +5,26 @@ LIB = -Llib -lopenbgi -lgdi32
 
 INCLUDE = -Ilib
 
-all : bin/libgraph.o bin/main.o
-	g++ -o bin/main bin/main.o bin/libgraph.o $(LIB)
+MODE = debug
+# release or debug
+
+ifeq ($(MODE), release)
+FLAGS = -Wall -O2
+else
+FLAGS = -Wall -O0 -g
+endif
+
+all : bin/libgraph.o bin/point.o bin/main.o
+	g++ -o bin/main bin/main.o bin/point.o bin/libgraph.o $(LIB)
 	
 bin/main.o: src/main.cpp
-	g++ -c src/main.cpp -o bin/main.o $(INCLUDE)
+	g++ -c src/main.cpp -o bin/main.o $(INCLUDE) $(FLAGS)
 
 bin/libgraph.o:
-	g++ -c src/libgraph.cpp -o bin/libgraph.o $(INCLUDE)
+	g++ -c src/libgraph.cpp -o bin/libgraph.o $(INCLUDE) $(FLAGS)
+	
+bin/point.o:
+	g++ -c src/point.cpp -o bin/point.o $(INCLUDE) $(FLAGS)
 	
 run:
 	bin/main
