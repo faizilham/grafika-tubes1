@@ -34,7 +34,12 @@ int main(){
 		
 		delay(30);
 	}
-	readkey();
+	
+	if (!kbhit()){
+		printf("no key pressed\n");
+	}
+	
+	getch();
 	return 0;
 
 }
