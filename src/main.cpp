@@ -17,25 +17,27 @@ void print(Transform t){
 int main(){
 
 	init_graph();
-		
+	
+	draw_ellipse(10, 10, 30, 80, 255);
+	
 	Quad q (-100, -100, -50, -50);
 	Transform t = createScale(0.01, 0.01);
 	
 	q.applyTransform(t);
 	
-	t = createScale(1.7, 1.7);
+	t = createScale(1.1, 1.1);
 	
-	for(int i = 0; i < 10; i++){
-		cleardevice();
-		
-		draw_line(0, 0, -250, -240, 255);
-		draw_line(0, 0, 250, -240, 255);
+	draw_line(0, 0, -250, -240, 255);
+	draw_line(0, 0, 250, -240, 255);
+	
+	for(int i = 0; i < 75; i++){
+		//cleardevice();
 		
 		q.draw(255);
 		
 		q.applyTransform(t);
 		
-		delay(500);
+		delay(50);
 	}
 	
 	
