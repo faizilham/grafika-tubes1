@@ -15,8 +15,12 @@ class Point{
 		friend Point operator* (float factor, const Point& p);
 		
 		void draw(int color);
+		void set(float x, float y);
+		
 		void applyTransform(matrix_t& m);
 		void applyTransform(Transform trans);
 };
+
+void draw_line(const Point& p1, const Point& p2, int color);
 
 #endif

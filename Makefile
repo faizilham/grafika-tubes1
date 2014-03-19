@@ -1,6 +1,6 @@
 # this makefile is used for compilation using openbgi (http://openbgi.sourceforge.net/)
 
-LIB = -Llib -lopenbgi -lgdi32 
+LIB = -Llib -lopenbgi -mwindows
 # -lcomdlg32 -luuid -loleaut32 -lole32 # needed or not?
 
 INCLUDE = -Ilib
@@ -14,8 +14,8 @@ else
 FLAGS = -Wall -O0 -g
 endif
 
-all : bin/libgraph.o bin/trans.o bin/point.o bin/main.o
-	g++ -o bin/main bin/libgraph.o bin/trans.o bin/point.o bin/main.o $(LIB)
+all : bin/libgraph.o bin/trans.o bin/point.o bin/main.o bin/quad.o
+	g++ -o bin/main bin/libgraph.o bin/trans.o bin/point.o bin/main.o bin/quad.o $(LIB)
 	
 bin/main.o: src/main.cpp
 	g++ -c src/main.cpp -o bin/main.o $(INCLUDE) $(FLAGS)
@@ -28,7 +28,11 @@ bin/point.o: src/point.cpp
 	
 bin/trans.o: src/trans.cpp
 	g++ -c src/trans.cpp -o bin/trans.o $(INCLUDE) $(FLAGS)
+
+bin/quad.o: src/quad.cpp
+	g++ -c src/quad.cpp -o bin/quad.o $(INCLUDE) $(FLAGS)
 	
+
 run:
 	bin/main
 

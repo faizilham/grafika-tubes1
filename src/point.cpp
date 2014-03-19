@@ -26,6 +26,10 @@ void Point::draw(int color){
 	paintpix(x, y, color);
 }
 
+void Point::set(float x, float y){
+	this->x = x; this->y = y;
+}
+
 void Point::applyTransform(matrix_t& m){
 	matrix_t res;
 	float pdata[3][1]; pdata[0][0] = x; pdata[1][0] = y; pdata[2][0] = 1;
@@ -38,12 +42,6 @@ void Point::applyTransform(Transform trans){
 	applyTransform(trans.mat);
 }
 
-/*
-
-static point_t transform(matrix_t m, point_t p){
-	
+void draw_line(const Point& p1, const Point& p2, int color){
+	draw_line(p1.x, p1.y, p2.x, p2.y, color);
 }
-
-
-
-*/

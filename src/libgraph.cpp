@@ -7,6 +7,8 @@ void init_graph(){
 	initgraph(&gdriver,&gmode,"C:\\TC\\BGI");
 	midx=getmaxx()/2;
 	midy=getmaxy()/2;
+	
+	printf("%d %d\n", midx, midy);
 }
 
 void paintpix(int x, int y, int color){

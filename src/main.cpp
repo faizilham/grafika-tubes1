@@ -1,5 +1,5 @@
 #include "libgraph.hpp"
-#include "point.hpp"
+#include "quad.hpp"
 
 
 void print(Transform t){
@@ -12,32 +12,33 @@ void print(Transform t){
 	printf("\n");
 }
 
+
+
 int main(){
 
 	init_graph();
-	
-	Point p1(100, 100); Point p2(150, 100);
-	Transform T, R, T1;
-	T = createTranslation(-100, -100);
-	T1 = createTranslation(100, 100);
-	R = createRotation(4);
-	
-	//Transform r1 = R * T;
-	Transform r2 = T1 * R * T;
-	
-	
-	for (int i = 0; i < 90; i++){
-		draw_line(p1.x, p1.y, p2.x, p2.y, 255);
 		
-		p1.applyTransform(r2);
-		p2.applyTransform(r2);
+	Quad q (-100, -100, -50, -50);
+	Transform t = createScale(0.01, 0.01);
+	
+	q.applyTransform(t);
+	
+	t = createScale(1.7, 1.7);
+	
+	for(int i = 0; i < 10; i++){
+		cleardevice();
 		
-		delay(30);
+		draw_line(0, 0, -250, -240, 255);
+		draw_line(0, 0, 250, -240, 255);
+		
+		q.draw(255);
+		
+		q.applyTransform(t);
+		
+		delay(500);
 	}
 	
-	if (!kbhit()){
-		printf("no key pressed\n");
-	}
+	
 	
 	getch();
 	return 0;
