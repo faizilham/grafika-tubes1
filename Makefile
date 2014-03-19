@@ -20,13 +20,13 @@ all : bin/libgraph.o bin/trans.o bin/point.o bin/main.o
 bin/main.o: src/main.cpp
 	g++ -c src/main.cpp -o bin/main.o $(INCLUDE) $(FLAGS)
 
-bin/libgraph.o:
+bin/libgraph.o: src/libgraph.cpp
 	g++ -c src/libgraph.cpp -o bin/libgraph.o $(INCLUDE) $(FLAGS)
 	
-bin/point.o:
+bin/point.o: src/point.cpp
 	g++ -c src/point.cpp -o bin/point.o $(INCLUDE) $(FLAGS)
 	
-bin/trans.o:
+bin/trans.o: src/trans.cpp
 	g++ -c src/trans.cpp -o bin/trans.o $(INCLUDE) $(FLAGS)
 	
 run:

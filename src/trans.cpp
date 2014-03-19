@@ -38,7 +38,7 @@ matrix_t Transform::operator* (matrix_t mat){
 }
 
 matrix_t operator* (matrix_t mat, Transform trans){
-	return trans * mat;
+	return mmultiply(mat, (float*) trans.mat.data, 3);
 }
 
 matrix_t Transform::operator* (Transform trans){
