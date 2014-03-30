@@ -1,6 +1,5 @@
-#include "libgraph.hpp"
 #include "quad.hpp"
-
+#include "road.hpp"
 
 void print(Transform t){
 	for(int i = 0; i < 3; i++){
@@ -18,8 +17,8 @@ int main(){
 
 	init_graph();
 	
-	draw_ellipse(10, 10, 30, 80, 255);
-	
+	//draw_ellipse(10, 10, 30, 80, 255);
+	Road r;
 	Quad q (-100, -100, -50, -50);
 	Transform t = createScale(0.01, 0.01);
 	
@@ -27,17 +26,19 @@ int main(){
 	
 	t = createScale(1.1, 1.1);
 	
-	draw_line(0, 0, -250, -240, 255);
-	draw_line(0, 0, 250, -240, 255);
+	
 	
 	for(int i = 0; i < 75; i++){
-		//cleardevice();
+		cleardevice();
+		// draw phase
+		r.draw();
+		q.draw(WHITE);
 		
-		q.draw(255);
-		
+		// update phase
+		r.update();
 		q.applyTransform(t);
 		
-		delay(50);
+		delay(100);
 	}
 	
 	

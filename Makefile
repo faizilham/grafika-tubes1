@@ -14,8 +14,8 @@ else
 FLAGS = -Wall -O0 -g
 endif
 
-all : bin/libgraph.o bin/trans.o bin/point.o bin/main.o bin/quad.o
-	g++ -o bin/main bin/libgraph.o bin/trans.o bin/point.o bin/main.o bin/quad.o $(LIB)
+all : bin/libgraph.o bin/trans.o bin/point.o bin/main.o bin/quad.o bin/line.o bin/road.o
+	g++ -o bin/main bin/libgraph.o bin/trans.o bin/point.o bin/main.o bin/quad.o bin/line.o bin/road.o $(LIB)
 	
 bin/main.o: src/main.cpp
 	g++ -c src/main.cpp -o bin/main.o $(INCLUDE) $(FLAGS)
@@ -32,6 +32,11 @@ bin/trans.o: src/trans.cpp
 bin/quad.o: src/quad.cpp
 	g++ -c src/quad.cpp -o bin/quad.o $(INCLUDE) $(FLAGS)
 	
+bin/line.o: src/line.cpp
+	g++ -c src/line.cpp -o bin/line.o $(INCLUDE) $(FLAGS)
+	
+bin/road.o: src/road.cpp
+	g++ -c src/road.cpp -o bin/road.o $(INCLUDE) $(FLAGS)
 
 run:
 	bin/main
