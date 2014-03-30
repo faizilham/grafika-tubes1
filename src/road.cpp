@@ -26,8 +26,8 @@ void Road::update(){
 
 void Road::draw(){
 	draw_line(-320, 0, 320, 0, WHITE);
-	draw_line(0, 0, -250, -240, WHITE);
-	draw_line(0, 0, 250, -240, WHITE);
+	draw_line(0, 0, -270, -240, WHITE); // left
+	draw_line(0, 0, 270, -240, WHITE); // right
 	
 	for (int i = 0; i < ROAD_MARK_NUM; i++){
 		roadmark[i].draw(WHITE);

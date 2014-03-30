@@ -1,9 +1,10 @@
 #ifndef LIBGRAPH_HPP
 #define LIBGRAPH_HPP
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <ctime>
 #include <graphics.h>
 #include <conio.h>
 #include <dos.h>

@@ -1,4 +1,5 @@
 #include "road.hpp"
+#include "obstacle_manager.hpp"
 
 void print(Transform t){
 	for(int i = 0; i < 3; i++){
@@ -10,6 +11,14 @@ void print(Transform t){
 	printf("\n");
 }
 
+bool getch_async(char& c){
+	if (kbhit()){
+		c = getch();
+		return true;
+	}else{
+		return false;
+	}
+}
 
 
 int main(){
@@ -25,24 +34,28 @@ int main(){
 	
 	t = createScale(1.1, 1.1);
 	
+	ObstacleManager OM;
 	
+	char c = 0;
 	
-	for(int i = 0; i < 75; i++){
+	while (c != 'q'){
 		cleardevice();
 		// draw phase
 		r.draw();
-		q.draw(WHITE);
+		OM.draw();
+		//q.draw(WHITE);
 		
 		// update phase
 		r.update();
-		q.applyTransform(t);
+		OM.update();
+		//q.applyTransform(t);
 		
 		delay(100);
+		
+		getch_async(c);
 	}
 	
 	
-	
-	getch();
 	return 0;
 
 }
