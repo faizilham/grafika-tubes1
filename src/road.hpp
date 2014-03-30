@@ -1,7 +1,7 @@
 #ifndef ROAD_HPP
 #define ROAD_HPP
 
-#include "line.hpp"
+#include "shapes.hpp"
 
 #define ROAD_MARK_NUM 8
 
