@@ -29,10 +29,10 @@ OBJFILE = $(foreach file,$(MODULES),bin/$(file).o)
 all: $(OBJFILE)
 	g++ -o bin/main $(OBJFILE) $(LIB)
 
-clean:
-	rm -f bin/main
+run:
+	./bin/main
 	
-cleanall:
+clean:
 	rm -f bin/main bin/*.o
 
 $(foreach file,$(MODULES),$(eval $(call module_template,$(file))))
