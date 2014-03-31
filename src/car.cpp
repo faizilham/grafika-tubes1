@@ -83,5 +83,5 @@ void Car::draw(){
 		depan[i].draw(255);
 	body.draw(YELLOW);
 	
-	fill_polygon(STARTX, STARTY, STARTX + CAR_LENGTH*2, STARTY + CAR_LENGTH,RED,YELLOW);
+	fill_polygon(body.corner[0].x, body.corner[0].y, body.corner[2].x, body.corner[2].y,RED,YELLOW);
 }

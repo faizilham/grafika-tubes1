@@ -22,7 +22,7 @@ class Rock : public Obstacle{
 	private:
 		Quad q,orig;
 		Transform left, right;
-		//Circle cir;
+		Circle c,origc;
 	public:
 		Rock();
 		virtual void applyTransform(Transform& trans);

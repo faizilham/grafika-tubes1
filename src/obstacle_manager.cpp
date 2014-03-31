@@ -24,6 +24,7 @@ void KotakKayu::reset(){
 
 void KotakKayu::draw(){
 	q.draw(WHITE);
+	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,WHITE);
 }
 
 void KotakKayu::setLane(int lane){
@@ -42,6 +43,10 @@ void KotakKayu::setLane(int lane){
 }
 
 Rock::Rock() : orig(-70, -80, -50, -30){
+	Point p(-60,-30);
+	Circle cc(p,0.2,0.2);
+	origc = cc;
+
 	reset();
 	
 	float absx = abs(orig.center.x);
@@ -52,6 +57,7 @@ Rock::Rock() : orig(-70, -80, -50, -30){
 
 void Rock::applyTransform(Transform& trans){
 	q.applyTransform(trans);
+	c.applyTransform(trans);
 }
 
 Point Rock::getFrontPoint(){
@@ -61,10 +67,13 @@ Point Rock::getFrontPoint(){
 
 void Rock::reset(){
 	q = orig;
+	c = origc;
 }
 
 void Rock::draw(){
 	q.draw(WHITE);
+	c.draw(WHITE);
+	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,WHITE);
 }
 
 void Rock::setLane(int lane){
@@ -80,6 +89,8 @@ void Rock::setLane(int lane){
 	
 	q.applyTransform(change);
 	orig.applyTransform(change);
+	c.applyTransform(change);
+	origc.applyTransform(change);
 }
 
 ObstacleManager::ObstacleManager(){
