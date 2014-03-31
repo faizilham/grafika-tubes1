@@ -119,3 +119,19 @@ void draw_ellipse(int xc, int yc, int rx,int ry, int color){
 	    }
 	}
 }
+
+void fill (int x, int y, int fill_color, int boundary_color)
+{
+	int current;
+	current = getpixel(x, y);
+	
+	if ((current != boundary_color) &&  (current != fill_color)){
+		setcolor(fill_color);
+		paintpix(x, y, fill_color);
+		
+		boundaryFill4 (x+1, y, fill_color, boundary_color); //right
+		boundaryFill4 (x-1,  y, fill_color, boundary_color); //left
+		boundaryFill4 (x, y-1, fill_color, boundary_color) ; //up
+		boundaryFill4 (x, y+1, fill_color, boundary_color); //down
+	}
+}
