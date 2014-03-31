@@ -1,6 +1,6 @@
 #include "obstacle_manager.hpp"
 
-TestObstacle::TestObstacle() : orig(-70, -80, -50, -30){
+KotakKayu::KotakKayu() : orig(-70, -80, -50, -60){
 	reset();
 	
 	float absx = abs(orig.center.x);
@@ -9,19 +9,55 @@ TestObstacle::TestObstacle() : orig(-70, -80, -50, -30){
 	right = createTranslation(absx, 0);
 }
 
-void TestObstacle::applyTransform(Transform& trans){
+void KotakKayu::applyTransform(Transform& trans){
 	q.applyTransform(trans);
 }
 
-void TestObstacle::reset(){
+void KotakKayu::reset(){
 	q = orig;
 }
 
-void TestObstacle::draw(){
+void KotakKayu::draw(){
 	q.draw(WHITE);
 }
 
-void TestObstacle::setLane(int lane){
+void KotakKayu::setLane(int lane){
+	Transform change;
+	int diff = lane - this->lane;
+	this->lane = lane;
+	
+	for (int i = 0; i < diff; i++)
+		change = right * change;
+		
+	for (int i = 0; i < -diff; i++)
+		change = left * change;
+	
+	q.applyTransform(change);
+	orig.applyTransform(change);
+}
+
+Tree::Tree() : orig(-70, -80, -50, -30){
+	reset();
+	
+	float absx = abs(orig.center.x);
+	
+	left = createTranslation(-absx, 0);
+	right = createTranslation(absx, 0);
+}
+
+void Tree::applyTransform(Transform& trans){
+	q.applyTransform(trans);
+}
+
+void Tree::reset(){
+	q = orig;
+}
+
+void Tree::draw(){
+	q.draw(WHITE);
+}
+
+void Tree::setLane(int lane){
 	Transform change;
 	int diff = lane - this->lane;
 	this->lane = lane;
@@ -43,8 +79,12 @@ ObstacleManager::ObstacleManager(){
 	move = createScale(1.1, 1.1);
 	reset = createScale(0.01, 0.01);
 	
-	for (int i = 0; i < 3; i++){
-		obs[i] = new TestObstacle();
+	
+	obs[0] = new KotakKayu();
+	obs[1] = new Tree();
+	obs[2] = new Tree();//harusnya batu besar
+	
+	for (int i = 0; i < 3; i++){	
 		obs[i]->applyTransform(reset);
 		obs[i]->frame = i * -30;
 	}

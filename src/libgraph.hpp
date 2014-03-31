@@ -9,7 +9,6 @@
 #include <conio.h>
 #include <dos.h>
 
-
 /** Graphic Primitive **/
 
 void init_graph();
