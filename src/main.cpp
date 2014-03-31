@@ -26,28 +26,34 @@ int main(){
 	Car car;
 	Road r;	
 	ObstacleManager OM;
+	Result result;
 	
 	bool gameover = false;
-	TextCountdown txt = TextCountdown(20,80,140);
+	bool flag = true;
+	TextCountdown txt = TextCountdown(1,80,140);
 	char strbuffer[64];
 	
 	char c = 0;
 	
 	// the game loop
 	while (c != 'q'){
-		cleardevice();
+		
 		if (txt.counter <= 0){
 			gameover = true;
 		}
 
 		if (gameover){
-			if (txt.counter <= 0)
-				showResultWin(5000);
-			else {
-				showResultLose(20-txt.counter*10);
+			if (txt.counter <= 0 && result.resultframe <25){
+				cleardevice();
+				result.showResultWin(5000);
+			}
+			else if (result.resultframe <25){
+				cleardevice();
+				result.showResultLose(20-txt.counter*10);
 			}
 		}
 		else {
+			cleardevice();
 			// draw phase
 			r.draw();
 			car.draw();

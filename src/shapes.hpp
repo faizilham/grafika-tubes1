@@ -3,6 +3,8 @@
 
 #include "libgraph.hpp"
 #include "trans.hpp"
+#include <vector>
+using namespace std;
 
 class Point{
 	public:
@@ -48,7 +50,8 @@ class Line{
 
 class Quad{	
 	public:
-		Point corner[4], center;
+		vector<Point> corner;
+		Point center;
 		Quad();
 		Quad(int x1, int y1, int x2, int y2);
 		
@@ -60,5 +63,19 @@ class Quad{
 };
 
 Quad createRect(int x1, int y1, int x2, int y2);
+
+class Polygon{
+	public:
+		vector<Point> corner;
+		Point center;
+		Polygon();
+		Polygon(vector<Point> corn,Point center);
+		Point& operator[] (int i);
+		void draw(int color);
+		void setCorner(vector<Point> corn);
+		void setCenter(Point ctr);
+		void applyTransform(Transform& trans);
+
+};
 
 #endif

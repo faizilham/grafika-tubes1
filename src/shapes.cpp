@@ -1,4 +1,5 @@
 #include "shapes.hpp"
+#include <cstdio>
 
 Point::Point(){
 	x = 0; y = 0;
@@ -90,10 +91,14 @@ Quad::Quad(){}
 
 Quad::Quad(int x1, int y1, int x2, int y2){
 	// rectangle
-	corner[0].set(x1,y1);
-	corner[1].set(x2,y1);
-	corner[2].set(x2,y2);
-	corner[3].set(x1,y2);
+	Point p1(x1,y1);
+	Point p2(x2,y1);
+	Point p3(x2,y2);
+	Point p4(x1,y2);
+	corner.push_back(p1);
+	corner.push_back(p2);
+	corner.push_back(p3);
+	corner.push_back(p4);
 	
 	center.set((x2+x1)/2, (y2+y1)/2);
 }
@@ -126,3 +131,42 @@ void Quad::selfRotate(int deg){
 Point& Quad::operator[] (int i){
 	return corner[i];
 }
+
+Polygon::Polygon(){
+
+}
+
+Polygon::Polygon(vector<Point> corn,Point ctr){
+	corner = corn;
+	center = center;
+}
+
+void Polygon::applyTransform(Transform& trans){
+	int l = corner.size();
+	for (int i = 0; i < l; i++){
+		corner[i].applyTransform(trans);
+	}
+	
+	center.applyTransform(trans);
+}
+
+void Polygon::draw(int color){
+	int l = corner.size();
+	for (int i = 0; i < l-1; i++){
+		draw_line(corner[i], corner[i+1], color);
+	}
+	draw_line(corner[l-1], corner[0], color);
+}
+
+void Polygon::setCorner(vector<Point> corn){
+	corner = corn;
+}
+
+void Polygon::setCenter(Point ctr){
+	center = ctr;
+}
+
+Point& Polygon::operator[] (int i){
+	return corner[i];
+}
+
