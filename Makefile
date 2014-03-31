@@ -10,9 +10,11 @@ MODE = debug
 # release or debug
 
 ifeq ($(MODE), release)
-FLAGS = -Wall -O2
+FLAGS += -O2
+LIB += -mwindows
 else
-FLAGS = -Wall -O0 -g
+FLAGS += -O0 -g
+LIB += -lgdi32
 endif
 
 # Everything after this is generic

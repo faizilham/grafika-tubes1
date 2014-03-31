@@ -2,17 +2,9 @@
 #include "obstacle_manager.hpp"
 #include "car.hpp"
 
-void print(Transform t){
-	for(int i = 0; i < 3; i++){
-		for(int j = 0; j < 3; j++){
-			printf("%.2f ", t[i][j]);
-		}
-		printf("\n");
-	}
-	printf("\n");
-}
-
 bool getch_async(char& c){
+	// non-blocking getch
+	
 	if (kbhit()){
 		c = getch();
 		if(c == 0){ //Handle arrow key
@@ -28,9 +20,9 @@ bool getch_async(char& c){
 
 
 int main(){
-
 	init_graph();
 	
+<<<<<<< HEAD
 	//draw_ellipse(10, 10, 30, 80, 255);
 	Car car;
 	Road r;
@@ -44,23 +36,38 @@ int main(){
 	ObstacleManager OM;
 	
 	char c;
+=======
+	Road r;	
+	ObstacleManager OM;
+	
+	char c = 0;
+	
+	// the game loop
+>>>>>>> 197faf57e83e6be4f410afabdd12d1338ccaef05
 	while (c != 'q'){
 		cleardevice();
+		
 		// draw phase
 		r.draw();
 		car.draw();
 		OM.draw();
+<<<<<<< HEAD
 		
 		//q.draw(WHITE);
+=======
+>>>>>>> 197faf57e83e6be4f410afabdd12d1338ccaef05
 		
 		// update phase
 		r.update();
 		car.update(c);
 		OM.update();
+<<<<<<< HEAD
 		//q.applyTransform(t);
 		c = 0;
-		delay(100);
+=======
 		
+>>>>>>> 197faf57e83e6be4f410afabdd12d1338ccaef05
+		delay(100);
 		getch_async(c);
 	}
 	
