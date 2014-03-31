@@ -60,5 +60,7 @@ void Car::update(char c){
 void Car::draw(){
 	for(int i=0;i<3;i++)
 		depan[i].draw(255);
-	body.draw(255);
+	body.draw(YELLOW);
+	
+	fill_polygon(STARTX, STARTY, STARTX + CAR_LENGTH*2, STARTY + CAR_LENGTH,RED,YELLOW);
 }
