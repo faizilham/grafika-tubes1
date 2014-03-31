@@ -1,8 +1,8 @@
 #include "obstacle_manager.hpp"
 
+
 KotakKayu::KotakKayu() : orig(-70, -80, -50, -60){
 	reset();
-	
 	float absx = abs(orig.center.x);
 	
 	left = createTranslation(-absx, 0);
@@ -11,6 +11,11 @@ KotakKayu::KotakKayu() : orig(-70, -80, -50, -60){
 
 void KotakKayu::applyTransform(Transform& trans){
 	q.applyTransform(trans);
+}
+
+Point KotakKayu::getFrontPoint(){
+	p = q.corner[0];
+	return p;
 }
 
 void KotakKayu::reset(){
@@ -36,7 +41,7 @@ void KotakKayu::setLane(int lane){
 	orig.applyTransform(change);
 }
 
-Tree::Tree() : orig(-70, -80, -50, -30){
+Rock::Rock() : orig(-70, -80, -50, -30){
 	reset();
 	
 	float absx = abs(orig.center.x);
@@ -45,19 +50,24 @@ Tree::Tree() : orig(-70, -80, -50, -30){
 	right = createTranslation(absx, 0);
 }
 
-void Tree::applyTransform(Transform& trans){
+void Rock::applyTransform(Transform& trans){
 	q.applyTransform(trans);
 }
 
-void Tree::reset(){
+Point Rock::getFrontPoint(){
+	p = q.corner[0];
+	return p;
+}
+
+void Rock::reset(){
 	q = orig;
 }
 
-void Tree::draw(){
+void Rock::draw(){
 	q.draw(WHITE);
 }
 
-void Tree::setLane(int lane){
+void Rock::setLane(int lane){
 	Transform change;
 	int diff = lane - this->lane;
 	this->lane = lane;
@@ -81,8 +91,8 @@ ObstacleManager::ObstacleManager(){
 	
 	
 	obs[0] = new KotakKayu();
-	obs[1] = new Tree();
-	obs[2] = new Tree();//harusnya batu besar
+	obs[1] = new Rock();
+	obs[2] = new Rock();//harusnya batu besar
 	
 	for (int i = 0; i < 3; i++){	
 		obs[i]->applyTransform(reset);
@@ -95,10 +105,32 @@ ObstacleManager::~ObstacleManager(){
 		delete obs[i];
 }
 
+void ObstacleManager::setCar(Car *_car){
+	car = _car;
+}
+
 void ObstacleManager::draw(){
 	for (int i = 0; i < 3; i++)
 		if (obs[i]->frame >= 0)
 			obs[i]->draw();
+}
+
+//Cek apakah mobil dan salah satu obstacle tabrakanzzz
+bool ObstacleManager::isCollided(){
+	//printf("Car lane: %d\n", car->getLane());
+	
+	for(int i=0;i<3;i++){
+		//printf("Obstacle[%d] lane: %d\n", i, obs[i]->lane);
+		//printf("obs[%d]: %d < %d\n", i, (int)(obs[i]->getFrontPoint()).y, (int)(car->getFrontPoint()).y);
+		
+		if(
+		   (obs[i]->getFrontPoint()).y < (car->getFrontPoint()).y 
+		&& (obs[i]->getFrontPoint()).y > (car->getBackPoint()).y
+		&& obs[i]->lane == car->getLane()){
+			return true;
+		}
+	}
+	return false;
 }
 
 void ObstacleManager::update(){

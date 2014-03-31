@@ -16,6 +16,9 @@ class Car{
 		
 	public:
 		Car();
+		int getLane();
+		Point getFrontPoint();
+		Point getBackPoint();
 		void update(char c);
 		void draw();
 };

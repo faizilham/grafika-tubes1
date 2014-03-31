@@ -3,6 +3,7 @@
 
 #include "shapes.hpp"
 #include "obstacle.hpp"
+#include "car.hpp"
 
 class KotakKayu : public Obstacle{
 	private:
@@ -12,25 +13,28 @@ class KotakKayu : public Obstacle{
 		KotakKayu();
 		virtual void applyTransform(Transform& trans);
 		virtual void setLane(int lane); //0 left, 1 middle, 2 right
+		virtual Point getFrontPoint();
 		virtual void reset();
 		virtual void draw();
 };
 
-class Tree : public Obstacle{
+class Rock : public Obstacle{
 	private:
 		Quad q,orig;
 		Transform left, right;
 		//Circle cir;
 	public:
-		Tree();
+		Rock();
 		virtual void applyTransform(Transform& trans);
 		virtual void setLane(int lane); //0 left, 1 middle, 2 right
+		virtual Point getFrontPoint();
 		virtual void reset();
 		virtual void draw();
 };
 
 class ObstacleManager{
 	private:
+		Car *car;
 		Obstacle *obs[3];
 		Transform move, reset;
 
@@ -38,7 +42,9 @@ class ObstacleManager{
 		ObstacleManager();
 		~ObstacleManager();
 		
+		void setCar(Car *car);
 		void draw();
+		bool isCollided();
 		void update();
 };
 
