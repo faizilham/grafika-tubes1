@@ -62,7 +62,7 @@ void showResultLose(int score){
 	int right = 320;
 	int top = 240;
 	int bot = -240;
-
+	char strbuffer[64];
 	// L
 	draw_line(left+60,top-80,left+60,bot+220,WHITE);
 	draw_line(left+60,bot+220,left+180,bot+220,WHITE);
