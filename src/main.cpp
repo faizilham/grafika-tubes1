@@ -1,6 +1,7 @@
 #include "road.hpp"
 #include "obstacle_manager.hpp"
 #include "car.hpp"
+#include "result.hpp"
 
 bool getch_async(char& c){
 	// non-blocking getch
@@ -24,25 +25,30 @@ int main(){
 	Car car;
 	Road r;	
 	ObstacleManager OM;
+	bool gameover = true;
 	
 	char c = 0;
 	
 	// the game loop
 	while (c != 'q'){
 		cleardevice();
-		
-		// draw phase
-		r.draw();
-		car.draw();
-		OM.draw();		
+		if (gameover){
+			showResultLose(0);
+		}
+		else {
+			// draw phase
+			r.draw();
+			car.draw();
+			OM.draw();		
 
-		// update phase
-		r.update();
-		car.update(c);
-		OM.update();
+			// update phase
+			r.update();
+			car.update(c);
+			OM.update();
 
-		c = 0;
-		delay(100);
+			c = 0;
+			delay(100);
+		}
 		getch_async(c);
 	}
 	
