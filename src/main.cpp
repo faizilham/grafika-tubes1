@@ -2,6 +2,7 @@
 #include "obstacle_manager.hpp"
 #include "car.hpp"
 #include "result.hpp"
+#include "text_countdown.hpp"
 
 bool getch_async(char& c){
 	// non-blocking getch
@@ -26,6 +27,8 @@ int main(){
 	Road r;	
 	ObstacleManager OM;
 	bool gameover = true;
+	TextCountdown txt = TextCountdown(20,80,140);
+	char strbuffer[64];
 	
 	char c = 0;
 	
@@ -39,12 +42,19 @@ int main(){
 			// draw phase
 			r.draw();
 			car.draw();
-			OM.draw();		
+			OM.draw();
+			/* countdown text*/
+			settextstyle(txt.style,0,txt.size);
+			setcolor(txt.color);
+			sprintf(strbuffer,"%d",txt.counter);
+			outtextxy(getmaxx()/2 + txt.x, getmaxy()/2 - txt.y, strbuffer);
+			/* end of countdown text*/
 
 			// update phase
 			r.update();
 			car.update(c);
 			OM.update();
+			txt.update();
 
 			c = 0;
 			delay(100);
