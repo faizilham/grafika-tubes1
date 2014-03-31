@@ -4,12 +4,25 @@
 #include "shapes.hpp"
 #include "obstacle.hpp"
 
-class TestObstacle : public Obstacle{
+class KotakKayu : public Obstacle{
 	private:
 		Quad q, orig;
 		Transform left, right;
 	public:
-		TestObstacle();
+		KotakKayu();
+		virtual void applyTransform(Transform& trans);
+		virtual void setLane(int lane); //0 left, 1 middle, 2 right
+		virtual void reset();
+		virtual void draw();
+};
+
+class Tree : public Obstacle{
+	private:
+		Quad q,orig;
+		Transform left, right;
+		//Circle cir;
+	public:
+		Tree();
 		virtual void applyTransform(Transform& trans);
 		virtual void setLane(int lane); //0 left, 1 middle, 2 right
 		virtual void reset();

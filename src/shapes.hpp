@@ -23,6 +23,17 @@ class Point{
 
 void draw_line(const Point& p1, const Point& p2, int color);
 
+class Circle{
+	public:
+		Point center;
+		int radx,rady;
+		Circle();
+		Circle(Point p, int rx, int ry);
+		
+		void applyTransform(Transform& trans);
+		void draw(int color);
+};
+
 class Line{
 	public:
 	Point p1, p2;

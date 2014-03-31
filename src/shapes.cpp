@@ -46,6 +46,18 @@ void draw_line(const Point& p1, const Point& p2, int color){
 	draw_line(p1.x, p1.y, p2.x, p2.y, color);
 }
 
+
+Circle::Circle(){}
+Circle::Circle(Point p, int rx, int ry){
+	center = p;
+	radx = rx;
+	rady = ry;
+}
+
+void Circle::draw(int color){
+	draw_ellipse(center.x, center.y, radx, rady, color);
+}
+
 Line::Line(){}
 Line::Line(int x1, int y1, int x2, int y2) : p1(x1,y1), p2(x2, y2){}
 Line::Line(Point _p1, Point _p2) : p1(_p1.x, _p1.y), p2(_p2.x, _p2.y){
