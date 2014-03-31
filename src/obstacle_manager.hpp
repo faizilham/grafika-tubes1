@@ -32,6 +32,20 @@ class Rock : public Obstacle{
 		virtual void draw();
 };
 
+class Wheel : public Obstacle{
+	private:
+		Quad orig,q;
+		Transform left, right;
+		Circle c,origc;
+	public:
+		Wheel();
+		virtual void applyTransform(Transform& trans);
+		virtual void setLane(int lane); //0 left, 1 middle, 2 right
+		virtual Point getFrontPoint();
+		virtual void reset();
+		virtual void draw();
+};
+
 class ObstacleManager{
 	private:
 		Car *car;
