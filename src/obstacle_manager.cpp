@@ -19,6 +19,7 @@ void KotakKayu::reset(){
 
 void KotakKayu::draw(){
 	q.draw(WHITE);
+	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,WHITE);
 }
 
 void KotakKayu::setLane(int lane){
@@ -61,6 +62,7 @@ void Tree::reset(){
 void Tree::draw(){
 	q.draw(WHITE);
 	c.draw(WHITE);
+	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,WHITE);
 }
 
 void Tree::setLane(int lane){

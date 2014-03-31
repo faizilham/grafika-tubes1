@@ -63,5 +63,4 @@ void Car::draw(){
 	body.draw(YELLOW);
 	
 	fill_polygon(body.corner[0].x, body.corner[0].y, body.corner[2].x, body.corner[2].y,RED,YELLOW);
-	fill(depan[0].p1.x+5,depan[0].p1.y+5,RED,YELLOW);
 }
