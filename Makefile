@@ -1,9 +1,9 @@
 # this makefile is used for compilation using openbgi (http://openbgi.sourceforge.net/)
 
 # the module names, without .cpp extension
-MODULES = libgraph trans shapes main road obstacle_manager
+MODULES = libgraph trans shapes main road obstacle_manager car
 
-LIB = -Llib -lopenbgi -mwindows
+LIB = -Llib -lopenbgi -lgdi32
 INCLUDE = -Ilib
 
 MODE = debug
