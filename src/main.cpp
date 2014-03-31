@@ -26,13 +26,10 @@ int main(){
 	Car car;
 	Road r;	
 	ObstacleManager OM;
-<<<<<<< HEAD
-	bool gameover = true;
+	
+	bool gameover = false;
 	TextCountdown txt = TextCountdown(20,80,140);
 	char strbuffer[64];
-=======
-	bool gameover = false;
->>>>>>> f2fc6342732363c36d08fe138ccf020d99a3d27a
 	
 	char c = 0;
 	
