@@ -21,6 +21,7 @@ bool getch_async(char& c){
 
 int main(){
 	init_graph();
+	Car car;
 	Road r;	
 	ObstacleManager OM;
 	
