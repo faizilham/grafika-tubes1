@@ -36,8 +36,16 @@ int main(){
 	// the game loop
 	while (c != 'q'){
 		cleardevice();
+		if (txt.counter <= 0){
+			gameover = true;
+		}
+
 		if (gameover){
-			showResultLose(0);
+			if (txt.counter <= 0)
+				showResultWin(5000);
+			else {
+				showResultLose(20-txt.counter*10);
+			}
 		}
 		else {
 			// draw phase

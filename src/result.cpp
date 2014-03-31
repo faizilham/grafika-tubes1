@@ -5,7 +5,7 @@ void showResultWin(int score){
 	int right = 320;
 	int top = 240;
 	int bot = -240;
-
+	char strbuffer[64];
 	// W
 	draw_line(left+60,top-80,left+140+5,bot+220,WHITE);
 	draw_line(left+140+5,bot+220,left+180+5,bot+300,WHITE);
@@ -49,6 +49,12 @@ void showResultWin(int score){
 	draw_line(right-60, bot+180, right-60, bot+200, WHITE);
 	draw_line(right-60, bot+200, left+60, bot+200,  WHITE);
 	draw_line(left+60, bot+200, left+60, bot+180, WHITE);
+
+	settextstyle(7,0,40);
+	setcolor(WHITE);
+	sprintf(strbuffer,"%d",score);
+	outtextxy(getmaxx()/2-50, getmaxy()/2+100, strbuffer);
+
 
 }
 void showResultLose(int score){
@@ -115,4 +121,9 @@ void showResultLose(int score){
 	draw_line(right-60, bot+180, right-60, bot+200, WHITE);
 	draw_line(right-60, bot+200, left+60, bot+200,  WHITE);
 	draw_line(left+60, bot+200, left+60, bot+180, WHITE);
+
+	settextstyle(7,0,40);
+	setcolor(WHITE);
+	sprintf(strbuffer,"%d",score);
+	outtextxy(getmaxx()/2-50, getmaxy()/2+100, strbuffer);
 }
