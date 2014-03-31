@@ -2,22 +2,21 @@
 #define CAR_HPP
 
 #include "shapes.hpp"
-#define CAR_LENGTH 50
-#define STARTX -1*(CAR_LENGTH/2)
+#define CAR_LENGTH 40
+#define STARTX -1*(CAR_LENGTH)
 #define STARTY -225
-#define SPEED 15
 
+enum CarState {LEFT, CENTER, RIGHT};
 class Car{
 	private:
 		Line depan[3];
 		Quad body;
-		Transform moveRight, moveLeft;
+		CarState state;
+		Transform moveLeft, moveRight;
 		
 	public:
 		Car();
-		
 		void update(char c);
 		void draw();
 };
-
 #endif

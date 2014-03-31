@@ -9,7 +9,7 @@ bool getch_async(char& c){
 		c = getch();
 		if(c == 0){ //Handle arrow key
 			c = getch();
-			printf("Char: %d\n", c);
+			//printf("Char: %d\n", c);
 		}
 		
 		return true;

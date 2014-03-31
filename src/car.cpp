@@ -10,6 +10,7 @@ Car::Car(){
 	   ---------------
 	*/
 	
+	state = CENTER;
 	
 	body = Quad(STARTX, STARTY, STARTX + CAR_LENGTH*2, STARTY + CAR_LENGTH);
 	
@@ -24,21 +25,35 @@ Car::Car(){
 	depan[0] = Line(P1, P3);
 	depan[1] = Line(P3, P4);
 	depan[2] = Line(P2, P4);
-	
-	//buat gerak
-	moveRight = createTranslation(SPEED, 0);
-	moveLeft = createTranslation(-1*SPEED, 0);
+	moveLeft = createTranslation(-120,0);
+	moveRight = createTranslation(120,0);
 }
 
 void Car::update(char c){
 	if(c == 75){
-		for(int i=0;i<3;i++)
-			depan[i].applyTransform(moveLeft);
-		body.applyTransform(moveLeft);
+		//printf("State: %d\nPencet kanan.\n", state);
+		if(state == CENTER || state == LEFT){
+			body.applyTransform(moveLeft);
+			for(int i=0;i<3;i++){
+				depan[i].applyTransform(moveLeft);
+			}
+		}
+		if(state == CENTER)
+			state = RIGHT;
+		else if(state == LEFT)
+			state = CENTER;
 	} else if(c == 77){
-		for(int i=0;i<3;i++)
-			depan[i].applyTransform(moveRight);
-		body.applyTransform(moveRight);
+		//printf("State: %d\nPencet kanan.\n", state);
+		if(state == CENTER || state == RIGHT){
+			body.applyTransform(moveRight);
+			for(int i=0;i<3;i++){
+				depan[i].applyTransform(moveRight);
+			}
+		}
+		if(state == CENTER)
+			state = LEFT;
+		else if(state == RIGHT)
+			state = CENTER;
 	}
 }
 
