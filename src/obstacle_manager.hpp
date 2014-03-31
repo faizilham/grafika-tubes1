@@ -20,7 +20,7 @@ class Tree : public Obstacle{
 	private:
 		Quad q,orig;
 		Transform left, right;
-		//Circle cir;
+		Circle c,origc;
 	public:
 		Tree();
 		virtual void applyTransform(Transform& trans);

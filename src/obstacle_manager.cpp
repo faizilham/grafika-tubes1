@@ -37,6 +37,9 @@ void KotakKayu::setLane(int lane){
 }
 
 Tree::Tree() : orig(-70, -80, -50, -30){
+	Point p(-60,-30);
+	Circle cc(p,0.2,0.2);
+	origc = cc;
 	reset();
 	
 	float absx = abs(orig.center.x);
@@ -47,14 +50,17 @@ Tree::Tree() : orig(-70, -80, -50, -30){
 
 void Tree::applyTransform(Transform& trans){
 	q.applyTransform(trans);
+	c.applyTransform(trans);
 }
 
 void Tree::reset(){
 	q = orig;
+	c = origc;
 }
 
 void Tree::draw(){
 	q.draw(WHITE);
+	c.draw(WHITE);
 }
 
 void Tree::setLane(int lane){
@@ -70,6 +76,8 @@ void Tree::setLane(int lane){
 	
 	q.applyTransform(change);
 	orig.applyTransform(change);
+	c.applyTransform(change);
+	origc.applyTransform(change);
 }
 
 ObstacleManager::ObstacleManager(){

@@ -26,10 +26,11 @@ void draw_line(const Point& p1, const Point& p2, int color);
 class Circle{
 	public:
 		Point center;
-		int radx,rady;
+		float radx,rady;
 		Circle();
-		Circle(Point p, int rx, int ry);
-		
+		Circle(Point p, float rx, float ry);
+
+		void applyTransform(matrix_t& m);
 		void applyTransform(Transform& trans);
 		void draw(int color);
 };
@@ -40,7 +41,7 @@ class Line{
 	Line();
 	Line(int x1, int y1, int x2, int y2);
 	Line(Point _p1, Point _p2);
-	
+
 	void applyTransform(Transform& trans);
 	void draw(int color);
 };
