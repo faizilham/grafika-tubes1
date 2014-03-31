@@ -28,6 +28,7 @@ class Line{
 	Point p1, p2;
 	Line();
 	Line(int x1, int y1, int x2, int y2);
+	Line(Point _p1, Point _p2);
 	
 	void applyTransform(Transform& trans);
 	void draw(int color);
