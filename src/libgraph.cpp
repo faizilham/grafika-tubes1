@@ -129,9 +129,9 @@ void fill (int x, int y, int fill_color, int boundary_color)
 		setcolor(fill_color);
 		paintpix(x, y, fill_color);
 		
-		boundaryFill4 (x+1, y, fill_color, boundary_color); //right
-		boundaryFill4 (x-1,  y, fill_color, boundary_color); //left
-		boundaryFill4 (x, y-1, fill_color, boundary_color) ; //up
-		boundaryFill4 (x, y+1, fill_color, boundary_color); //down
+		fill (x+1, y, fill_color, boundary_color); //right
+		fill (x-1,  y, fill_color, boundary_color); //left
+		fill (x, y-1, fill_color, boundary_color) ; //up
+		fill (x, y+1, fill_color, boundary_color); //down
 	}
 }
