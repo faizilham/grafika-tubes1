@@ -11,7 +11,7 @@ bool getch_async(char& c){
 		c = getch();
 		if(c == 0){ //Handle arrow key
 			c = getch();
-			printf("Char: %d\n", c);
+			//printf("Char: %d\n", c);
 		}
 		
 		return true;
@@ -29,11 +29,12 @@ int main(){
 	Result result;
 	
 	bool gameover = false;
-	bool flag = true;
-	TextCountdown txt = TextCountdown(1,80,140);
+	TextCountdown txt = TextCountdown(100,80,140);
 	char strbuffer[64];
 	
 	char c = 0;
+	
+	OM.setCar(&car);
 	
 	// the game loop
 	while (c != 'q'){
@@ -70,6 +71,10 @@ int main(){
 			car.update(c);
 			OM.update();
 			txt.update();
+			
+			if(OM.isCollided()){
+				gameover = true;
+			}
 
 			c = 0;
 			delay(100);

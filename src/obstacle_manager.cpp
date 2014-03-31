@@ -1,8 +1,8 @@
 #include "obstacle_manager.hpp"
 
+
 KotakKayu::KotakKayu() : orig(-70, -80, -50, -60){
 	reset();
-	
 	float absx = abs(orig.center.x);
 	
 	left = createTranslation(-absx, 0);
@@ -13,12 +13,18 @@ void KotakKayu::applyTransform(Transform& trans){
 	q.applyTransform(trans);
 }
 
+Point KotakKayu::getFrontPoint(){
+	p = q.corner[0];
+	return p;
+}
+
 void KotakKayu::reset(){
 	q = orig;
 }
 
 void KotakKayu::draw(){
 	q.draw(WHITE);
+	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,WHITE);
 }
 
 void KotakKayu::setLane(int lane){
@@ -36,10 +42,11 @@ void KotakKayu::setLane(int lane){
 	orig.applyTransform(change);
 }
 
-Tree::Tree() : orig(-70, -80, -50, -30){
+Rock::Rock() : orig(-70, -80, -50, -30){
 	Point p(-60,-30);
 	Circle cc(p,0.2,0.2);
 	origc = cc;
+
 	reset();
 	
 	float absx = abs(orig.center.x);
@@ -48,22 +55,79 @@ Tree::Tree() : orig(-70, -80, -50, -30){
 	right = createTranslation(absx, 0);
 }
 
-void Tree::applyTransform(Transform& trans){
+void Rock::applyTransform(Transform& trans){
 	q.applyTransform(trans);
 	c.applyTransform(trans);
 }
 
-void Tree::reset(){
+Point Rock::getFrontPoint(){
+	p = q.corner[0];
+	return p;
+}
+
+void Rock::reset(){
 	q = orig;
 	c = origc;
 }
 
-void Tree::draw(){
+void Rock::draw(){
 	q.draw(WHITE);
 	c.draw(WHITE);
+	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,WHITE);
 }
 
-void Tree::setLane(int lane){
+void Rock::setLane(int lane){
+	Transform change;
+	int diff = lane - this->lane;
+	this->lane = lane;
+	
+	for (int i = 0; i < diff; i++)
+		change = right * change;
+		
+	for (int i = 0; i < -diff; i++)
+		change = left * change;
+	
+	q.applyTransform(change);
+	orig.applyTransform(change);
+	c.applyTransform(change);
+	origc.applyTransform(change);
+}
+
+Wheel::Wheel() : orig(-70, -80, -50, -30){
+	Point p(-60,-30);
+	Circle cc(p,0.05,0.05);
+	origc = cc;
+
+	reset();
+	
+	float absx = abs(orig.center.x);
+	
+	left = createTranslation(-absx, 0);
+	right = createTranslation(absx, 0);
+}
+
+void Wheel::applyTransform(Transform& trans){
+	q.applyTransform(trans);
+	c.applyTransform(trans);
+}
+
+Point Wheel::getFrontPoint(){
+	p = q.corner[0];
+	return p;
+}
+
+void Wheel::reset(){
+	q = orig;
+	c = origc;
+}
+
+void Wheel::draw(){
+	//q.draw(WHITE);
+	c.draw(WHITE);
+	//fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,WHITE);
+}
+
+void Wheel::setLane(int lane){
 	Transform change;
 	int diff = lane - this->lane;
 	this->lane = lane;
@@ -89,8 +153,8 @@ ObstacleManager::ObstacleManager(){
 	
 	
 	obs[0] = new KotakKayu();
-	obs[1] = new Tree();
-	obs[2] = new Tree();//harusnya batu besar
+	obs[1] = new Rock();
+	obs[2] = new Wheel();//harusnya batu besar
 	
 	for (int i = 0; i < 3; i++){	
 		obs[i]->applyTransform(reset);
@@ -103,10 +167,32 @@ ObstacleManager::~ObstacleManager(){
 		delete obs[i];
 }
 
+void ObstacleManager::setCar(Car *_car){
+	car = _car;
+}
+
 void ObstacleManager::draw(){
 	for (int i = 0; i < 3; i++)
 		if (obs[i]->frame >= 0)
 			obs[i]->draw();
+}
+
+//Cek apakah mobil dan salah satu obstacle tabrakanzzz
+bool ObstacleManager::isCollided(){
+	//printf("Car lane: %d\n", car->getLane());
+	
+	for(int i=0;i<3;i++){
+		//printf("Obstacle[%d] lane: %d\n", i, obs[i]->lane);
+		//printf("obs[%d]: %d < %d\n", i, (int)(obs[i]->getFrontPoint()).y, (int)(car->getFrontPoint()).y);
+		
+		if(
+		   (obs[i]->getFrontPoint()).y < (car->getFrontPoint()).y 
+		&& (obs[i]->getFrontPoint()).y > (car->getBackPoint()).y
+		&& obs[i]->lane == car->getLane()){
+			return true;
+		}
+	}
+	return false;
 }
 
 void ObstacleManager::update(){
