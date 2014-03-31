@@ -25,7 +25,7 @@ int main(){
 	Car car;
 	Road r;	
 	ObstacleManager OM;
-	bool gameover = true;
+	bool gameover = false;
 	
 	char c = 0;
 	
