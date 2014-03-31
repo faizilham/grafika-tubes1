@@ -48,15 +48,30 @@ void draw_line(const Point& p1, const Point& p2, int color){
 
 
 Circle::Circle(){}
-Circle::Circle(Point p, int rx, int ry){
+Circle::Circle(Point p, float rx, float ry){
 	center = p;
 	radx = rx;
 	rady = ry;
 }
 
+void Circle::applyTransform(matrix_t& m){
+	matrix_t res;
+	float pdata[3][1]; pdata[0][0] = center.x; pdata[1][0] = center.y; pdata[2][0] = 1;
+	
+	res = mmultiply(m, (float*) pdata, 1);
+	center.x = res.data[0][0]; center.y = res.data[1][0];
+	radx*=1.1;
+	rady*=1.1;
+}
+
+void Circle::applyTransform(Transform& trans){
+	applyTransform(trans.mat);
+}
+
 void Circle::draw(int color){
 	draw_ellipse(center.x, center.y, radx, rady, color);
 }
+
 
 Line::Line(){}
 Line::Line(int x1, int y1, int x2, int y2) : p1(x1,y1), p2(x2, y2){}
