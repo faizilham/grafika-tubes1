@@ -7,7 +7,7 @@ void init_graph(){
 	initgraph(&gdriver,&gmode,"C:\\TC\\BGI");
 	midx=getmaxx()/2;
 	midy=getmaxy()/2;
-	
+
 	printf("%d %d\n", midx, midy);
 }
 
@@ -20,10 +20,10 @@ void draw_line(int x1, int y1, int x2, int y2, int color){
 	// using bresenham algorithm
 
 	int error = 0, x, y, dx, dy, c1, c2, c3;
-	
+
 	if (abs(x1 - x2) > abs(y1 - y2)){ // low slope, |m| < 1
 		int xstart, xfinish;
-	
+
 		// calculate start-end x
 		if (x1 < x2){
 			xstart = x1; xfinish = x2;
@@ -32,17 +32,17 @@ void draw_line(int x1, int y1, int x2, int y2, int color){
 			xstart = x2; xfinish = x1;
 			dx = x1 - x2; dy = y1 - y2; y = y2;
 		}
-		
+
 		// calculate constants depends on positive of negative gradient
 		if (dy > 0){
 			c1 = 2; c2 = 1; c3 = dy - dx;
 		}else{
 			c1 = -2; c2 = -1; c3 = dy + dx;
 		}
-		
+
 		for (x = xstart; x <= xfinish; x++){
 			paintpix(x, y, color);
-			
+
 			// calculate next error and next y
 			if (c1*(error + dy) < dx){
 				error += dy;
@@ -50,10 +50,10 @@ void draw_line(int x1, int y1, int x2, int y2, int color){
 				y+=c2; error += c3;
 			}
 		}
-	
+
 	}else{ // high slope, |m| >= 1
 		int ystart, yfinish;
-	
+
 		// calculate start-end y
 		if (y1 < y2){
 			ystart = y1; yfinish = y2;
@@ -62,17 +62,17 @@ void draw_line(int x1, int y1, int x2, int y2, int color){
 			ystart = y2; yfinish = y1;
 			dy = y1 - y2; dx = x1 - x2; x = x2;
 		}
-		
+
 		// calculate constants depends on positive of negative gradient
 		if (dx > 0){
 			c1 = 2; c2 = 1; c3 = dx - dy;
 		}else{
 			c1 = -2; c2 = -1; c3 = dx + dy;
 		}
-		
+
 		for (y = ystart; y <= yfinish; y++){
 			paintpix(x, y, color);
-			
+
 			// calculate next error and next x
 			if (c1*(error + dx) < dy){
 				error += dx;
@@ -91,7 +91,7 @@ void draw_ellipse(int xc, int yc, int rx,int ry, int color){
 		paintpix(xc-x,yc-y,color);
 		paintpix(xc+x,yc-y,color);
 		paintpix(xc-x,yc+y,color);
-	   
+
 		if(p<0){
 		   x=x+1;
 		   p=p+(2*ry*ry*x)+(ry*ry);
@@ -102,7 +102,7 @@ void draw_ellipse(int xc, int yc, int rx,int ry, int color){
 		}
 	}
 		p=((float)x+0.5)*((float)x+0.5)*ry*ry+(y-1)*(y-1)*rx*rx-rx*rx*ry*ry;
-    
+
 	while(y>=0){
 		paintpix(xc+x,yc+y,color);
 		paintpix(xc-x,yc-y,color);
@@ -122,16 +122,18 @@ void draw_ellipse(int xc, int yc, int rx,int ry, int color){
 
 void fill (int x, int y, int fill_color, int boundary_color)
 {
+	int cartesian_x = midx + x;
+	int cartesian_y = midy - y;
 	int current;
-	current = getpixel(x, y);
-	
+	current = getpixel(cartesian_x, cartesian_y);
+
 	if ((current != boundary_color) &&  (current != fill_color)){
 		setcolor(fill_color);
 		paintpix(x, y, fill_color);
-		
-		fill (x+1, y, fill_color, boundary_color); //right
-		fill (x-1,  y, fill_color, boundary_color); //left
-		fill (x, y-1, fill_color, boundary_color) ; //up
-		fill (x, y+1, fill_color, boundary_color); //down
+
+		fill (x + 1, y, fill_color, boundary_color); //right
+		fill (x - 1,  y, fill_color, boundary_color); //left
+		fill (x, y - 1, fill_color, boundary_color) ; //up
+		fill (x, y + 1, fill_color, boundary_color); //down
 	}
 }
