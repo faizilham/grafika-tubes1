@@ -3,7 +3,7 @@
 # the module names, without .cpp extension
 MODULES = libgraph trans shapes main road obstacle_manager car
 
-LIB = -Llib -lopenbgi -lgdi32
+LIB = -Llib -lopenbgi
 INCLUDE = -Ilib
 
 MODE = debug
