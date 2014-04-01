@@ -29,7 +29,7 @@ int main(){
 	Result result;
 	
 	bool gameover = false;
-	TextCountdown txt = TextCountdown(100,80,140);
+	TextCountdown txt = TextCountdown(30,80,140);
 	char strbuffer[64];
 	
 	char c = 0;
