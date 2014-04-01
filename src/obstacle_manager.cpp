@@ -23,8 +23,8 @@ void KotakKayu::reset(){
 }
 
 void KotakKayu::draw(){
-	q.draw(WHITE);
-	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,WHITE);
+	q.draw(BROWN);
+	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,BROWN);
 }
 
 void KotakKayu::setLane(int lane){
@@ -71,10 +71,10 @@ void Rock::reset(){
 }
 
 void Rock::draw(){
-	q.draw(WHITE);
-	c.draw(WHITE);
-	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,WHITE);
-	fill_polygon(c.center.x - c.radx, c.center.y - c.rady, c.center.x + c.radx, c.center.y + c.rady,GREEN,WHITE);
+	q.draw(BROWN);
+	c.draw(GREEN);
+	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,BROWN);
+	fill_polygon(c.center.x - c.radx, c.center.y - c.rady, c.center.x + c.radx, c.center.y + c.rady,GREEN,GREEN);
 }
 
 void Rock::setLane(int lane){
@@ -124,8 +124,8 @@ void Wheel::reset(){
 
 void Wheel::draw(){
 	//q.draw(WHITE);
-	c.draw(WHITE);
-	fill_polygon(c.center.x - c.radx, c.center.y - c.rady, c.center.x + c.radx, c.center.y + c.rady,7,WHITE);
+	c.draw(RED);
+	fill_polygon(c.center.x - c.radx, c.center.y - c.rady, c.center.x + c.radx, c.center.y + c.rady,7,RED);
 }
 
 void Wheel::setLane(int lane){
@@ -198,7 +198,7 @@ bool ObstacleManager::isCollided(){
 
 void ObstacleManager::update(){
 	for (int i = 0; i < 3; i++){
-		if (obs[i]->frame >= 75){
+		if (obs[i]->frame >= 68){
 			obs[i]->frame = 0;	obs[i]->reset();
 			obs[i]->setLane(rand() % 3);
 			obs[i]->applyTransform(reset);

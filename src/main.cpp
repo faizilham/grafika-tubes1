@@ -37,7 +37,7 @@ int main(){
 	OM.setCar(&car);
 	
 	// the game loop
-	while (c != 'q'){
+	while (c != 'q' && c != 'Q'){
 		
 		if (txt.counter <= 0){
 			gameover = true;
