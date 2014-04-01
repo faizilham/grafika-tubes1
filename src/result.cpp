@@ -140,7 +140,7 @@ void Result::showResultWin(int score){
 		pol_n.applyTransform(scale);
 	}
 	pol_w.draw(WHITE);
-	fill_polygon(pol_w[0].x, pol_w[4].y, pol_w[4].x, pol_w[0].y,WHITE,WHITE);
+	fill_polygon(pol_w[0].x, pol_w[3].y, pol_w[4].x, pol_w[0].y,WHITE,WHITE);
 	pol_i.draw(WHITE);
 	fill_polygon(pol_i[0].x, pol_i[2].y, pol_i[2].x, pol_i[0].y,WHITE,WHITE);
 	pol_n.draw(WHITE);
