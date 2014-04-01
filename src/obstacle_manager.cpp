@@ -94,13 +94,13 @@ void Rock::setLane(int lane){
 }
 
 Wheel::Wheel() : orig(-70, -80, -50, -30){
-	Point p(-60,-30);
+	Point p(-30,-30);
 	Circle cc(p,0.05,0.05);
 	origc = cc;
 
 	reset();
 	
-	float absx = abs(orig.center.x);
+	float absx = abs(p.x);
 	
 	left = createTranslation(-absx, 0);
 	right = createTranslation(absx, 0);
@@ -112,7 +112,7 @@ void Wheel::applyTransform(Transform& trans){
 }
 
 Point Wheel::getFrontPoint(){
-	p = q.corner[0];
+	p = Point(c.center.x - c.radx, c.center.y - c.rady);
 	return p;
 }
 
