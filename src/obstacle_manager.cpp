@@ -95,8 +95,8 @@ void Rock::setLane(int lane){
 }
 
 Wheel::Wheel() : orig(-70, -80, -50, -30){
-	Point p(-30,-30);
-	Circle cc(p,0.05,0.05);
+	Point p(-50,-50);
+	Circle cc(p,0.1,0.1);
 	origc = cc;
 
 	reset();
@@ -152,6 +152,8 @@ ObstacleManager::ObstacleManager(){
 	move = createScale(1.1, 1.1);
 	reset = createScale(0.01, 0.01);
 	
+	rotate_left = createTranslation(-320, -240) * createRotation(10) * createTranslation(320, 240);
+	rotate_right = createTranslation(320, -240) * createRotation(-10) * createTranslation(-320, 240);
 	
 	obs[0] = new KotakKayu();
 	obs[1] = new Rock();
@@ -202,6 +204,12 @@ void ObstacleManager::update(){
 			obs[i]->frame = 0;	obs[i]->reset();
 			obs[i]->setLane(rand() % 3);
 			obs[i]->applyTransform(reset);
+		}else if (obs[i]->frame >= 58){
+			if (obs[i]->lane == 2)
+				obs[i]->applyTransform(rotate_right);
+			else
+				obs[i]->applyTransform(rotate_left);
+			obs[i]->frame++;
 		}else{
 			if (obs[i]->frame >= 0)
 				obs[i]->applyTransform(move);
