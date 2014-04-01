@@ -74,6 +74,7 @@ void Rock::draw(){
 	q.draw(WHITE);
 	c.draw(WHITE);
 	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,WHITE);
+	fill_polygon(c.center.x - c.radx, c.center.y - c.rady, c.center.x + c.radx, c.center.y + c.rady,GREEN,WHITE);
 }
 
 void Rock::setLane(int lane){
@@ -124,7 +125,7 @@ void Wheel::reset(){
 void Wheel::draw(){
 	//q.draw(WHITE);
 	c.draw(WHITE);
-	//fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,WHITE);
+	fill_polygon(c.center.x - c.radx, c.center.y - c.rady, c.center.x + c.radx, c.center.y + c.rady,7,WHITE);
 }
 
 void Wheel::setLane(int lane){

@@ -80,8 +80,9 @@ Point Car::getBackPoint(){
 
 void Car::draw(){
 	for(int i=0;i<3;i++)
-		depan[i].draw(255);
+		depan[i].draw(YELLOW);
 	body.draw(YELLOW);
 	
 	fill_polygon(body.corner[0].x, body.corner[0].y, body.corner[2].x, body.corner[2].y,RED,YELLOW);
+	fill_polygon(depan[0].p1.x, depan[0].p1.y, depan[2].p1.x, depan[2].p2.y,RED,YELLOW);
 }
