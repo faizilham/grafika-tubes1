@@ -174,7 +174,7 @@ int main(){
 		draw_line(b1, b2, YELLOW);
 		draw_line(b2, b3, YELLOW);
 		draw_line(b3, b4, YELLOW);
-		draw_line(b1, b4, YELLOW);		 
+		draw_line(b1, b4, YELLOW);		
 		
 		//draw_line(-60, 140, -250, 60, WHITE);
 		draw_line_b(0, 0, 50, 50, WHITE);
@@ -191,7 +191,7 @@ int main(){
 		if(c == 'm'){
 			if(magnified){
 				magnifyClip(0.5f);
-			} else{
+			} else {
 				magnifyClip(2);
 			}
 			magnified ^= 1;

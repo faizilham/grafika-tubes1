@@ -148,8 +148,8 @@ bool isExtremePoint(int x, int y){
 	int left_color = getpixel(cartesian_x-1, cartesian_y);
 	int right_color = getpixel(cartesian_x+1, cartesian_y);
 	int leftbottom_color = getpixel(cartesian_x-1, cartesian_y-1);
-	int rightbottom_color = getpixel(cartesian_x+1, cartesian_y+1);
-	int bottom_color = getpixel(cartesian_x, cartesian_y+1);
+	int rightbottom_color = getpixel(cartesian_x+1, cartesian_y-1);
+	int bottom_color = getpixel(cartesian_x, cartesian_y-1);
 	
 	if((left_color != boundary_color)
 		&& (right_color != boundary_color)
@@ -169,7 +169,6 @@ void fill_polygon (int xmin, int ymin, int xmax, int ymax, int fill_color, int b
 //trying to use scan line algorithm
 //horizontal scan line
 	int curr_x, curr_color;
-	bool ok_to_fill;
 	
 	//scan line
 	for(int y = ymin+1; y < ymax; y++){
@@ -182,22 +181,24 @@ void fill_polygon (int xmin, int ymin, int xmax, int ymax, int fill_color, int b
 			curr_color = getpixel(midx + curr_x,midy - y);
 		}
 		//found the leftmost edge
-		while(curr_x < xmax){
-			curr_color = getpixel(midx + curr_x,midy - y);
-			//if curr_x meets the boundary edge
-			if(curr_color == boundary_color){
-				if(isExtremePoint(curr_x,y) == false){
-					status = !status;
+		if(curr_color == boundary_color){
+			while(curr_x < xmax){
+				curr_color = getpixel(midx + curr_x,midy - y);
+				//if curr_x meets the boundary edge
+				if(curr_color == boundary_color){
+					if(isExtremePoint(curr_x,y) == false){
+						status = !status;
+					}
 				}
-			}
-			if(status == true){
-				//if curr_x is inside the polygon
-				if ((curr_color != boundary_color) &&  (curr_color != fill_color)){
-					setcolor (fill_color);
-					paintpix(curr_x, y, fill_color);
+				if(status == true){
+					//if curr_x is inside the polygon
+					if ((curr_color != boundary_color) &&  (curr_color != fill_color)){
+						setcolor (fill_color);
+						paintpix(curr_x, y, fill_color);
+					}
 				}
+				curr_x++;
 			}
-			curr_x++;
 		}
 	}	
 }

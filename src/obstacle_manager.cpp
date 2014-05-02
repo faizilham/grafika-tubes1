@@ -23,8 +23,8 @@ void KotakKayu::reset(){
 }
 
 void KotakKayu::draw(){
-	q.draw(WHITE);
-	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,WHITE);
+	q.draw(BROWN);
+	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,BROWN);
 }
 
 void KotakKayu::setLane(int lane){
@@ -71,9 +71,10 @@ void Rock::reset(){
 }
 
 void Rock::draw(){
-	q.draw(WHITE);
-	c.draw(WHITE);
-	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,WHITE);
+	q.draw(BROWN);
+	c.draw(GREEN);
+	fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,BROWN);
+	fill_polygon(c.center.x - c.radx, c.center.y - c.rady, c.center.x + c.radx, c.center.y + c.rady,GREEN,GREEN);
 }
 
 void Rock::setLane(int lane){
@@ -94,13 +95,13 @@ void Rock::setLane(int lane){
 }
 
 Wheel::Wheel() : orig(-70, -80, -50, -30){
-	Point p(-60,-30);
-	Circle cc(p,0.05,0.05);
+	Point p(-50,-50);
+	Circle cc(p,0.1,0.1);
 	origc = cc;
 
 	reset();
 	
-	float absx = abs(orig.center.x);
+	float absx = abs(p.x);
 	
 	left = createTranslation(-absx, 0);
 	right = createTranslation(absx, 0);
@@ -112,7 +113,7 @@ void Wheel::applyTransform(Transform& trans){
 }
 
 Point Wheel::getFrontPoint(){
-	p = q.corner[0];
+	p = Point(c.center.x - c.radx, c.center.y - c.rady);
 	return p;
 }
 
@@ -123,8 +124,8 @@ void Wheel::reset(){
 
 void Wheel::draw(){
 	//q.draw(WHITE);
-	c.draw(WHITE);
-	//fill_polygon(q.corner[0].x, q.corner[0].y, q.corner[2].x, q.corner[2].y,BROWN,WHITE);
+	c.draw(RED);
+	fill_polygon(c.center.x - c.radx, c.center.y - c.rady, c.center.x + c.radx, c.center.y + c.rady,7,RED);
 }
 
 void Wheel::setLane(int lane){
@@ -151,6 +152,8 @@ ObstacleManager::ObstacleManager(){
 	move = createScale(1.1, 1.1);
 	reset = createScale(0.01, 0.01);
 	
+	rotate_left = createTranslation(-320, -240) * createRotation(10) * createTranslation(320, 240);
+	rotate_right = createTranslation(320, -240) * createRotation(-10) * createTranslation(-320, 240);
 	
 	obs[0] = new KotakKayu();
 	obs[1] = new Rock();
@@ -197,10 +200,16 @@ bool ObstacleManager::isCollided(){
 
 void ObstacleManager::update(){
 	for (int i = 0; i < 3; i++){
-		if (obs[i]->frame >= 75){
+		if (obs[i]->frame >= 68){
 			obs[i]->frame = 0;	obs[i]->reset();
 			obs[i]->setLane(rand() % 3);
 			obs[i]->applyTransform(reset);
+		}else if (obs[i]->frame >= 58){
+			if (obs[i]->lane == 2)
+				obs[i]->applyTransform(rotate_right);
+			else
+				obs[i]->applyTransform(rotate_left);
+			obs[i]->frame++;
 		}else{
 			if (obs[i]->frame >= 0)
 				obs[i]->applyTransform(move);

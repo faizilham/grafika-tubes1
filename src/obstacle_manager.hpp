@@ -50,7 +50,7 @@ class ObstacleManager{
 	private:
 		Car *car;
 		Obstacle *obs[3];
-		Transform move, reset;
+		Transform move, reset, rotate_left, rotate_right;
 
 	public:
 		ObstacleManager();
