@@ -199,6 +199,9 @@ void fill_polygon (int xmin, int ymin, int xmax, int ymax, int fill_color, int b
 			}
 			curr_x++;
 		}
-	}
-	
+	}	
 }
+
+
+
+

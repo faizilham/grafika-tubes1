@@ -136,7 +136,7 @@ Polygon::Polygon(){
 
 }
 
-Polygon::Polygon(vector<Point> corn,Point ctr){
+Polygon::Polygon(vector<Point> corn, Point ctr){
 	corner = corn;
 	center = center;
 }
